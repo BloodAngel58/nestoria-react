@@ -15,8 +15,7 @@ export const formReducer = (state = initialState, action) => {
         }
         case 'SET_CATALOG_FAVOURITES': {
             return {
-                ...state,
-                itemsFavourites: action.payload
+                itemsFavourites: [...state.itemsFavourites, action.payload]
             };
         }
         case 'SET_CITY':

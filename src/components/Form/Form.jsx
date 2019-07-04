@@ -2,11 +2,11 @@ import "../Form/Form"
 import React from "react";
 import Input from "../InputSearch/InputSearch";
 import ItemsList from "../ItemsList/ItemsList";
+import ModalWindow from "../ModalWindow/ModalWindow"
 import { connect } from "react-redux";
 import {
-    getCatalog,
     getDownloadData,
-    //  setFavorits,
+    setFavorits,
     setCyty
 } from "../../redux/actions/catalogActions";
 const url =
@@ -14,12 +14,27 @@ const url =
 
 class Form extends React.Component {
     state = {
-        page: 1
+        page: 1,
+        isModalOpen: false,
+        objInformation: null
     }
     moreInformation = key => {
         console.log(key)
     }
+    openModalWindow = (obj) => {
+        this.setState({ isModalOpen: true });
+        this.setState({ objInformation: obj })
+    }
 
+    closeModal = () => {
+        this.setState({ isModalOpen: false });
+        this.setState({ objInformation: null })
+    }
+    addFavorits = () => {
+        console.log("addFavorits")
+        this.props.setFavorits(this.state.objInformation)
+        console.log(this.state.objInformation)
+    }
     searchText = city => {
         const udateUrl = url + city;
         this.props.setCyty(city);
@@ -27,10 +42,14 @@ class Form extends React.Component {
     };
     render() {
         const arrCatalog = this.props.posts.catalogList
+        const modal = this.state.isModalOpen ? (
+            <ModalWindow obj={this.state.objInformation} closeModal={this.closeModal} addFavorits={this.addFavorits} />
+        ) : null;
         return (
             <React.Fragment>
+                {modal}
                 <Input searchText={this.searchText} />
-                <ItemsList data={arrCatalog} moreInformation={this.moreInformation} />
+                <ItemsList data={arrCatalog} moreInformation={this.moreInformation} openModalWindow={this.openModalWindow} />
             </React.Fragment>
         );
     }
@@ -46,7 +65,7 @@ const mapDispatchToProps = dispatch => {
     return {
         setCyty: text => dispatch(setCyty(text)),
         getDownloadData: url => dispatch(getDownloadData(url)),
-        // setFavorits: data => dispatch(setFavorits(data))
+        setFavorits: data => dispatch(setFavorits(data))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
