@@ -31,9 +31,7 @@ class Form extends React.Component {
         this.setState({ objInformation: null })
     }
     addFavorits = () => {
-        console.log("addFavorits")
         this.props.setFavorits(this.state.objInformation)
-        console.log(this.state.objInformation)
     }
     searchText = city => {
         const udateUrl = url + city;
@@ -41,7 +39,6 @@ class Form extends React.Component {
         this.props.getDownloadData(udateUrl)
     };
     render() {
-        const arrCatalog = this.props.posts.catalogList
         const modal = this.state.isModalOpen ? (
             <ModalWindow obj={this.state.objInformation} closeModal={this.closeModal} addFavorits={this.addFavorits} />
         ) : null;
@@ -49,7 +46,7 @@ class Form extends React.Component {
             <React.Fragment>
                 {modal}
                 <Input searchText={this.searchText} />
-                <ItemsList data={arrCatalog} moreInformation={this.moreInformation} openModalWindow={this.openModalWindow} />
+                <ItemsList data={this.props.posts.catalogList} moreInformation={this.moreInformation} openModalWindow={this.openModalWindow} />
             </React.Fragment>
         );
     }

@@ -8,15 +8,17 @@ export const formReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_CATALOG': {
             return {
-                // catalogList: [...state.catalogList, action.payload]
                 ...state,
                 catalogList: action.payload
             };
         }
         case 'SET_CATALOG_FAVOURITES': {
-            return {
-                itemsFavourites: [...state.itemsFavourites, action.payload]
-            };
+            if (!state.itemsFavourites.includes(action.payload)) {
+                return {
+
+                    ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
+                };
+            } else return { ...state }
         }
         case 'SET_CITY':
             return {
