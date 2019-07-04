@@ -2,6 +2,7 @@ import "../Form/Form"
 import React from "react";
 import Input from "../InputSearch/InputSearch";
 import ItemsList from "../ItemsList/ItemsList";
+import ItemFavorits from "../ItemFavorits/ItemFavorits";
 import ModalWindow from "../ModalWindow/ModalWindow"
 import { connect } from "react-redux";
 import {
@@ -42,10 +43,15 @@ class Form extends React.Component {
         const modal = this.state.isModalOpen ? (
             <ModalWindow obj={this.state.objInformation} closeModal={this.closeModal} addFavorits={this.addFavorits} />
         ) : null;
+        const favourites = this.props.posts.itemsFavourites.length ? (
+            <ItemsList data={this.props.posts.itemsFavourites} > <h1>Избранное</h1></ItemsList>
+        ) : null;
         return (
             <React.Fragment>
                 {modal}
                 <Input searchText={this.searchText} />
+                {favourites}
+
                 <ItemsList data={this.props.posts.catalogList} moreInformation={this.moreInformation} openModalWindow={this.openModalWindow} />
             </React.Fragment>
         );
