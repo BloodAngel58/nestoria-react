@@ -1,0 +1,3 @@
+export const GET_CATALOG = 'GET_CATALOG';
+export const SET_CATALOG_FAVOURITES = 'SET_CATALOG_FAVOURITES';
+export const SET_CITY = 'SET_CITY'
