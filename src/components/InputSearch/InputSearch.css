@@ -1,0 +1,16 @@
+.input-task {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    border: 5px solid black;
+    border-radius: 10px;
+}
+
+.data-input__text {
+    flex-grow: 3;
+}
+
+.data-input__search {
+    flex-grow: 1;
+}
