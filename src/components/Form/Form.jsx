@@ -1,4 +1,4 @@
-import "../Form/Form"
+import "../Form/Form.css"
 import React from "react";
 import Input from "../InputSearch/InputSearch";
 import ItemsList from "../ItemsList/ItemsList";
@@ -32,6 +32,10 @@ class Form extends React.Component {
         this.setState({ displaySelectionInt: number })
     }
 
+    deleteItemFavourits = id => {
+        this.props.delTasks(id);
+    };
+
     closeModal = () => {
         this.setState({ isModalOpen: false, itemModal: null });
     }
@@ -44,19 +48,21 @@ class Form extends React.Component {
         this.props.getDownloadData(updateUrl)
     };
     render() {
+
         const modal = this.state.isModalOpen ? (
             <ModalWindow itemModal={this.state.itemModal} closeModal={this.closeModal} addFavourits={this.addFavourits} />
         ) : null;
-        const favourites = this.props.posts.itemsFavourites.length ? (
-            <ItemsList className={this.state.displaySelectionInt ? "" : "video-display"} data={this.props.posts.itemsFavourites} > <h1>Избранное</h1></ItemsList>
-        ) : null;
+
         return (
             <React.Fragment>
+
                 {modal}
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
-                {favourites}
-                <ItemsList className={this.state.displaySelectionInt ? "video-display" : ""} data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />
+                {this.state.displaySelectionInt ? <ItemsList data={this.props.posts.itemsFavourites} deleteItemFavourits={this.deleteItemFavourits}>
+                </ItemsList> :
+                    <ItemsList data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />}
+
             </React.Fragment>
         );
     }

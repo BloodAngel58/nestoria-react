@@ -4,7 +4,7 @@ import "../Item/Item.css";
 class Item extends React.Component {
     render() {
         const { img_url, title, keywords, summary, price_formatted, lister_url } = this.props.tasks;
-        const {  openModalWindow } = this.props;
+        const { openModalWindow, deleteItemFavourits } = this.props;
 
         return (
             <div className="loaded-itemList__search" id={lister_url} onClick={() => openModalWindow(this.props.tasks.img_url)}>
@@ -18,6 +18,14 @@ class Item extends React.Component {
                     <h5>{price_formatted}</h5>
                 </div>
                 <button className="more-detaile__button">More information</button>
+                {deleteItemFavourits ? <p>Уууиии</p> : <p>NAAAAIN</p>}
+                {/* {this.props.deleteItemFavourits ? <input
+                    type="button"
+                    className="single-todo__destroy-button"
+                    value=" x "
+                    onClick={() => this.props.deleteItemFavourits(img_url)}
+                /> : null} */}
+
             </div >
         );
     }
