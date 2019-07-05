@@ -7,7 +7,7 @@ export const getCatalog = data => {
     };
 };
 
-export const setFavorits = data => {
+export const setFavourits = data => {
     return {
         type: _str.SET_CATALOG_FAVOURITES,
         payload: data

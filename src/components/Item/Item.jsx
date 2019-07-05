@@ -4,10 +4,10 @@ import "../Item/Item.css";
 class Item extends React.Component {
     render() {
         const { img_url, title, keywords, summary, price_formatted, lister_url } = this.props.tasks;
-        const { moreInformation, openModalWindow } = this.props;
+        const {  openModalWindow } = this.props;
 
         return (
-            <div className="loaded-itemList__search" id={lister_url} onClick={() => openModalWindow(this.props.tasks)}>
+            <div className="loaded-itemList__search" id={lister_url} onClick={() => openModalWindow(this.props.tasks.img_url)}>
                 <div className="loaded-img__item ">
                     <img src={img_url} alt="alt.png" />
                 </div>
@@ -17,7 +17,7 @@ class Item extends React.Component {
                     <div>{summary}</div>
                     <h5>{price_formatted}</h5>
                 </div>
-                <button onClick={() => moreInformation(lister_url)} className="more-detaile__button">More information</button>
+                <button className="more-detaile__button">More information</button>
             </div >
         );
     }

@@ -4,8 +4,9 @@ import React from "react";
 class ModalWindow extends React.Component {
 
     render() {
-        const { img_url, title, keywords, summary, price_formatted, lister_url } = this.props.obj;
-        const { closeModal, addFavorits } = this.props
+        console.log(this.props.itemModal)
+        const { img_url, title, keywords, summary, price_formatted, lister_url } = this.props.itemModal;
+        const { closeModal, addFavourits } = this.props
         return (
             <div className="modal" id={lister_url}>
                 <div className="modal-todo__item">
@@ -20,7 +21,7 @@ class ModalWindow extends React.Component {
                     </div>
                     <div className="more-detaile__button">
                         <button className="hide-modal__button" onClick={closeModal}>Закрыть окно</button>
-                        <button className="add-favorit__button" onClick={() => addFavorits(this.props.obj)}>Добавить в избранное</button>
+                        <button className="add-favorit__button" onClick={() => addFavourits(this.props.img_url)}>Добавить в избранное</button>
                     </div>
 
                 </div>

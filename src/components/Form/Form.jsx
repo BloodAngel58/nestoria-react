@@ -2,12 +2,12 @@ import "../Form/Form"
 import React from "react";
 import Input from "../InputSearch/InputSearch";
 import ItemsList from "../ItemsList/ItemsList";
-import ItemFavorits from "../ItemFavorits/ItemFavorits";
 import ModalWindow from "../ModalWindow/ModalWindow"
+import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
 import {
     getDownloadData,
-    setFavorits,
+    setFavourits,
     setCyty
 } from "../../redux/actions/catalogActions";
 const url =
@@ -17,42 +17,46 @@ class Form extends React.Component {
     state = {
         page: 1,
         isModalOpen: false,
-        objInformation: null
+        itemModal: null,
+        displaySelectionInt: 0
     }
-    moreInformation = key => {
-        console.log(key)
+
+    openModalWindow = (key) => {
+        this.setState({
+            isModalOpen: true,
+            itemModal: this.props.posts.catalogList.find(item => item.img_url === key)
+        });
     }
-    openModalWindow = (obj) => {
-        this.setState({ isModalOpen: true });
-        this.setState({ objInformation: obj })
+    displaySelection = (number) => {
+        console.log(number)
+        this.setState({ displaySelectionInt: number })
     }
 
     closeModal = () => {
-        this.setState({ isModalOpen: false });
-        this.setState({ objInformation: null })
+        this.setState({ isModalOpen: false, itemModal: null });
     }
-    addFavorits = () => {
-        this.props.setFavorits(this.state.objInformation)
+    addFavourits = () => {
+        this.props.setFavourits(this.state.itemModal)
     }
     searchText = city => {
-        const udateUrl = url + city;
+        const updateUrl = url + city;
         this.props.setCyty(city);
-        this.props.getDownloadData(udateUrl)
+        this.props.getDownloadData(updateUrl)
     };
     render() {
         const modal = this.state.isModalOpen ? (
-            <ModalWindow obj={this.state.objInformation} closeModal={this.closeModal} addFavorits={this.addFavorits} />
+            <ModalWindow itemModal={this.state.itemModal} closeModal={this.closeModal} addFavourits={this.addFavourits} />
         ) : null;
         const favourites = this.props.posts.itemsFavourites.length ? (
-            <ItemsList data={this.props.posts.itemsFavourites} > <h1>Избранное</h1></ItemsList>
+            <ItemsList className={this.state.displaySelectionInt ? "" : "video-display"} data={this.props.posts.itemsFavourites} > <h1>Избранное</h1></ItemsList>
         ) : null;
         return (
             <React.Fragment>
                 {modal}
                 <Input searchText={this.searchText} />
+                <DisplaySelection displaySelection={this.displaySelection} />
                 {favourites}
-
-                <ItemsList data={this.props.posts.catalogList} moreInformation={this.moreInformation} openModalWindow={this.openModalWindow} />
+                <ItemsList className={this.state.displaySelectionInt ? "video-display" : ""} data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />
             </React.Fragment>
         );
     }
@@ -68,7 +72,7 @@ const mapDispatchToProps = dispatch => {
     return {
         setCyty: text => dispatch(setCyty(text)),
         getDownloadData: url => dispatch(getDownloadData(url)),
-        setFavorits: data => dispatch(setFavorits(data))
+        setFavourits: data => dispatch(setFavourits(data))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -5,10 +5,10 @@ import { Item } from "../Item/Item.jsx";
 
 class ItemList extends Component {
     renderNews = tasks => {
-        const { moreInformation, openModalWindow } = this.props;
+        const { openModalWindow } = this.props;
         if (tasks.length !== 0) {
             return tasks.map(function (item) {
-                return <Item key={item.lister_url} tasks={item} openModalWindow={openModalWindow} moreInformation={moreInformation} />;
+                return <Item key={item.lister_url} tasks={item} openModalWindow={openModalWindow} />;
             });
         }
         return <p>К сожалению данных нет</p>;
