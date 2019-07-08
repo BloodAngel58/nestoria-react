@@ -3,14 +3,30 @@
     justify-content: center;
     padding: 10px;
     margin: 10px;
-    border: 5px solid black;
-    border-radius: 10px;
+    border: 3px solid black;
+    border-radius: 1px;
+    height: 60px;
 }
 
 .data-input__text {
+    background-color: #282c34;
     flex-grow: 3;
+    border: none;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    text-decoration: none;
 }
 
 .data-input__search {
+    flex: 0%;
+    justify-content: center;
+    background-color:#e5194a;
+    text-decoration: none;
     flex-grow: 1;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    color: white;
 }

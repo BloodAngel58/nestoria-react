@@ -1,36 +1,80 @@
-import "../Form/Form"
+import "../Form/Form.css"
 import React from "react";
 import Input from "../InputSearch/InputSearch";
 import ItemsList from "../ItemsList/ItemsList";
+import ModalWindow from "../ModalWindow/ModalWindow"
+import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
 import {
-    getCatalog,
     getDownloadData,
-    //  setFavorits,
-    setCyty
+    setFavourits,
+    setCyty,
+    deleteFavourits
 } from "../../redux/actions/catalogActions";
 const url =
     "https://cors-anywhere.herokuapp.com/https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&country=uk&listing_type=buy&place_name=";
 
 class Form extends React.Component {
     state = {
-        page: 1
+        page: 1,
+        isModalOpen: false,
+        itemModal: null,
+        displaySelectionInt: 0,
+        displayFavourits: true
     }
-    moreInformation = key => {
-        console.log(key)
+
+    openModalWindow = (key) => {
+        this.setState({
+            isModalOpen: true,
+            itemModal: this.props.posts.catalogList.find(item => item.img_url === key)
+        });
+    }
+    displaySelection = (number) => {
+        this.setState({ displaySelectionInt: number })
+    }
+
+    deleteItemFavourits = id => {
+        this.props.deleteFavourits(id);
+    };
+
+    closeModal = () => {
+        this.setState({ isModalOpen: false, itemModal: null });
+    }
+
+    addFavourits = () => {
+        this.props.setFavourits(this.state.itemModal)
     }
 
     searchText = city => {
-        const udateUrl = url + city;
+        const updateUrl = url + city;
         this.props.setCyty(city);
-        this.props.getDownloadData(udateUrl)
+        this.props.getDownloadData(updateUrl)
     };
+
     render() {
-        const arrCatalog = this.props.posts.catalogList
+
         return (
             <React.Fragment>
+                {this.state.isModalOpen ?
+                    <ModalWindow
+                        displaySelectionInt={this.state.displaySelectionInt}
+                        itemModal={this.state.itemModal}
+                        closeModal={this.closeModal}
+                        addFavourits={this.addFavourits} />
+                    : null
+                }
                 <Input searchText={this.searchText} />
-                <ItemsList data={arrCatalog} moreInformation={this.moreInformation} />
+                <DisplaySelection displaySelection={this.displaySelection} />
+                {this.state.displaySelectionInt ?
+                    <ItemsList
+                        displayFavourits={this.state.displayFavourits}
+                        deleteItemFavourits={this.deleteItemFavourits}
+                        openModalWindow={this.openModalWindow}
+                        data={this.props.posts.itemsFavourites} />
+                    : <ItemsList
+                        data={this.props.posts.catalogList}
+                        openModalWindow={this.openModalWindow} />
+                }
             </React.Fragment>
         );
     }
@@ -46,7 +90,8 @@ const mapDispatchToProps = dispatch => {
     return {
         setCyty: text => dispatch(setCyty(text)),
         getDownloadData: url => dispatch(getDownloadData(url)),
-        // setFavorits: data => dispatch(setFavorits(data))
+        setFavourits: data => dispatch(setFavourits(data)),
+        deleteFavourits: id => dispatch(deleteFavourits(id))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
