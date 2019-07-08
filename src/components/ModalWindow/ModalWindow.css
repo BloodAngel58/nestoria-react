@@ -54,3 +54,5 @@ padding:0  }
   color: blue;
   cursor: pointer;
 }
+.add-favorit__button:active { background: green; }
+.hide-modal__button:active { background: red; }

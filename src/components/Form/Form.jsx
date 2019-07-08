@@ -40,27 +40,41 @@ class Form extends React.Component {
     closeModal = () => {
         this.setState({ isModalOpen: false, itemModal: null });
     }
+
     addFavourits = () => {
         this.props.setFavourits(this.state.itemModal)
     }
+
     searchText = city => {
         const updateUrl = url + city;
         this.props.setCyty(city);
         this.props.getDownloadData(updateUrl)
     };
+
     render() {
 
-        const modal = this.state.isModalOpen ? (
-            <ModalWindow itemModal={this.state.itemModal} closeModal={this.closeModal} addFavourits={this.addFavourits} />
-        ) : null;
+        const modal = this.state.isModalOpen ?
+            <ModalWindow
+                displaySelectionInt={this.state.displaySelectionInt}
+                itemModal={this.state.itemModal}
+                closeModal={this.closeModal}
+                addFavourits={this.addFavourits} />
+            : null;
 
         return (
             <React.Fragment>
                 {modal}
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
-                {this.state.displaySelectionInt ? <ItemsList displayFavourits={this.state.displayFavourits} deleteItemFavourits={this.deleteItemFavourits} openModalWindow={this.openModalWindow} data={this.props.posts.itemsFavourites}>
-                </ItemsList> : <ItemsList data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />
+                {this.state.displaySelectionInt ?
+                    <ItemsList
+                        displayFavourits={this.state.displayFavourits}
+                        deleteItemFavourits={this.deleteItemFavourits}
+                        openModalWindow={this.openModalWindow}
+                        data={this.props.posts.itemsFavourites} />
+                    : <ItemsList
+                        data={this.props.posts.catalogList}
+                        openModalWindow={this.openModalWindow} />
                 }
             </React.Fragment>
         );

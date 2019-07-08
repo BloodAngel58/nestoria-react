@@ -105,3 +105,4 @@
     color: red;
   cursor: pointer;
 }
+.single-todo__destroy-button:active  { background: red; }
