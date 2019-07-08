@@ -26,6 +26,11 @@ export const formReducer = (state = initialState, action) => {
                 ...state, city: action.payload
             };
 
+        case 'DELL_FAVOURITES': {
+            return {
+                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.img_url !== action.payload)
+            };
+        }
         default:
             return state;
     }

@@ -8,7 +8,8 @@ import { connect } from "react-redux";
 import {
     getDownloadData,
     setFavourits,
-    setCyty
+    setCyty,
+    deleteFavourits
 } from "../../redux/actions/catalogActions";
 const url =
     "https://cors-anywhere.herokuapp.com/https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&country=uk&listing_type=buy&place_name=";
@@ -18,7 +19,8 @@ class Form extends React.Component {
         page: 1,
         isModalOpen: false,
         itemModal: null,
-        displaySelectionInt: 0
+        displaySelectionInt: 0,
+        displayFavourits: true
     }
 
     openModalWindow = (key) => {
@@ -28,12 +30,11 @@ class Form extends React.Component {
         });
     }
     displaySelection = (number) => {
-        console.log(number)
         this.setState({ displaySelectionInt: number })
     }
 
     deleteItemFavourits = id => {
-        this.props.delTasks(id);
+        this.props.deleteFavourits(id);
     };
 
     closeModal = () => {
@@ -55,14 +56,12 @@ class Form extends React.Component {
 
         return (
             <React.Fragment>
-
                 {modal}
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
-                {this.state.displaySelectionInt ? <ItemsList data={this.props.posts.itemsFavourites} deleteItemFavourits={this.deleteItemFavourits}>
-                </ItemsList> :
-                    <ItemsList data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />}
-
+                {this.state.displaySelectionInt ? <ItemsList displayFavourits={this.state.displayFavourits} deleteItemFavourits={this.deleteItemFavourits} openModalWindow={this.openModalWindow} data={this.props.posts.itemsFavourites}>
+                </ItemsList> : <ItemsList data={this.props.posts.catalogList} openModalWindow={this.openModalWindow} />
+                }
             </React.Fragment>
         );
     }
@@ -78,7 +77,8 @@ const mapDispatchToProps = dispatch => {
     return {
         setCyty: text => dispatch(setCyty(text)),
         getDownloadData: url => dispatch(getDownloadData(url)),
-        setFavourits: data => dispatch(setFavourits(data))
+        setFavourits: data => dispatch(setFavourits(data)),
+        deleteFavourits: id => dispatch(deleteFavourits(id))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

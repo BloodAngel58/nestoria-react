@@ -19,7 +19,12 @@ export const setCyty = text => {
         payload: text
     };
 };
-
+export const deleteFavourits = id => {
+    return {
+        type: _str.DELL_FAVOURITES,
+        payload: id
+    };
+}
 export const getDownloadData = (url) => {
     return (dispatch) => {
         return fetch(url, {
