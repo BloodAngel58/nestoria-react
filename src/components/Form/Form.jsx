@@ -53,17 +53,16 @@ class Form extends React.Component {
 
     render() {
 
-        const modal = this.state.isModalOpen ?
-            <ModalWindow
-                displaySelectionInt={this.state.displaySelectionInt}
-                itemModal={this.state.itemModal}
-                closeModal={this.closeModal}
-                addFavourits={this.addFavourits} />
-            : null;
-
         return (
             <React.Fragment>
-                {modal}
+                {this.state.isModalOpen ?
+                    <ModalWindow
+                        displaySelectionInt={this.state.displaySelectionInt}
+                        itemModal={this.state.itemModal}
+                        closeModal={this.closeModal}
+                        addFavourits={this.addFavourits} />
+                    : null
+                }
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
                 {this.state.displaySelectionInt ?
