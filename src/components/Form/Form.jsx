@@ -5,6 +5,7 @@ import ItemsList from "../ItemsList/ItemsList";
 import ModalWindow from "../ModalWindow/ModalWindow"
 import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
+import { Route, Redirect, Switch } from 'react-router-dom';
 import {
     getDownloadData,
     setFavourits,
@@ -54,29 +55,47 @@ class Form extends React.Component {
     render() {
 
         return (
-            <React.Fragment>
-                {this.state.isModalOpen ?
-                    <ModalWindow
+
+            <div>
+                <Input searchText={this.searchText} />
+                <DisplaySelection displaySelection={this.displaySelection} />
+                <Switch>
+                    <Route exact path='/HOME' component={() => <ItemsList data={this.props.posts.catalogList}
+                        openModalWindow={this.openModalWindow} />} />
+                    <Route exact path='/ITEM' component={() => <ModalWindow
                         displaySelectionInt={this.state.displaySelectionInt}
                         itemModal={this.state.itemModal}
                         closeModal={this.closeModal}
-                        addFavourits={this.addFavourits} />
-                    : null
-                }
-                <Input searchText={this.searchText} />
-                <DisplaySelection displaySelection={this.displaySelection} />
-                {this.state.displaySelectionInt ?
-                    <ItemsList
-                        displayFavourits={this.state.displayFavourits}
-                        deleteItemFavourits={this.deleteItemFavourits}
-                        openModalWindow={this.openModalWindow}
-                        data={this.props.posts.itemsFavourites} />
-                    : <ItemsList
-                        data={this.props.posts.catalogList}
-                        openModalWindow={this.openModalWindow} />
-                }
-            </React.Fragment>
+                        addFavourits={this.addFavourits} />} />
+                </Switch>
+            </div>
         );
+
+
+        // return (
+        //     <React.Fragment>
+        //         {this.state.isModalOpen ?
+        //             <ModalWindow
+        //                 displaySelectionInt={this.state.displaySelectionInt}
+        //                 itemModal={this.state.itemModal}
+        //                 closeModal={this.closeModal}
+        //                 addFavourits={this.addFavourits} />
+        //             : null
+        //         }
+        //         <Input searchText={this.searchText} />
+        //         <DisplaySelection displaySelection={this.displaySelection} />
+        //         {this.state.displaySelectionInt ?
+        //             <ItemsList
+        //                 displayFavourits={this.state.displayFavourits}
+        //                 deleteItemFavourits={this.deleteItemFavourits}
+        //                 openModalWindow={this.openModalWindow}
+        //                 data={this.props.posts.itemsFavourites} />
+        //             : <ItemsList
+        //                 data={this.props.posts.catalogList}
+        //                 openModalWindow={this.openModalWindow} />
+        //         }
+        //     </React.Fragment>
+        // );
     }
 }
 

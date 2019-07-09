@@ -7,6 +7,13 @@ export const getCatalog = data => {
     };
 };
 
+export const setNumberPages = number => {
+    return {
+        type: _str.SET_NUMBER__PAGES,
+        payload: number
+    };
+};
+
 export const setFavourits = data => {
     return {
         type: _str.SET_CATALOG_FAVOURITES,
@@ -37,8 +44,8 @@ export const getDownloadData = (url) => {
         })
             .then(res => res.json())
             .then(res => {
-                const arr = res.response.listings;
-                dispatch(getCatalog(arr))
+                dispatch(setNumberPages(res.response.total_pages > 100 ? 100 : res.response.total_pages))
+                dispatch(getCatalog(res.response.listings))
             }
             )
             .catch(error => console.log(error));

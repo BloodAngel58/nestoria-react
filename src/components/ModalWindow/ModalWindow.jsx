@@ -1,6 +1,6 @@
 import "../ModalWindow/ModalWindow.css"
 import React from "react";
-
+import { Link } from 'react-router-dom'
 class ModalWindow extends React.Component {
 
     render() {
@@ -34,7 +34,8 @@ class ModalWindow extends React.Component {
                     </div>
                     <div className="more-detaile__button">
                         <button className="hide-modal__button"
-                            onClick={closeModal}>Закрыть окно</button>
+                        // onClick={closeModal}
+                        ><Link to='/HOME'>ВЕРНУТЬСЯ</Link></button>
                         {displaySelectionInt ? null
                             : <button className="add-favorit__button"
                                 onClick={() => addFavourits(this.props.img_url)}>Добавить в избранное</button>}

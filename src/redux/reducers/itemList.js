@@ -1,7 +1,8 @@
 export const initialState = {
     catalogList: [],
     itemsFavourites: [],
-    city: null
+    city: null,
+    NumberPages: null
 }
 
 export const formReducer = (state = initialState, action) => {
@@ -21,14 +22,21 @@ export const formReducer = (state = initialState, action) => {
             } else return { ...state }
         }
 
-        case 'SET_CITY':
+        case 'SET_NUMBER__PAGES': {
+            return {
+                ...state, NumberPages: action.payload
+            };
+        }
+
+        case 'SET_CITY': {
             return {
                 ...state, city: action.payload
             };
+        }
 
         case 'DELL_FAVOURITES': {
             return {
-                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.img_url !== action.payload)
+                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.lister_url !== action.payload)
             };
         }
         default:

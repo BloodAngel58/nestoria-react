@@ -1,6 +1,6 @@
 import React from "react";
 import "../Item/Item.css";
-
+import { Link } from 'react-router-dom'
 class Item extends React.Component {
     render() {
         const {
@@ -24,7 +24,7 @@ class Item extends React.Component {
                     <div className="loaded-itemList__search" id={lister_url} >
                         <div className="loaded-img__item ">
                             <img src={img_url} alt="alt.png"
-                                onClick={() => openModalWindow(this.props.tasks.img_url)} />
+                                onClick={() => openModalWindow(this.props.tasks.lister_url)} />
                         </div>
                         <div className="loaded-text__content">
                             <h2>{title}</h2>
@@ -36,7 +36,7 @@ class Item extends React.Component {
                             <button >More information</button>
                             <button
                                 className="single-todo__destroy-button"
-                                onClick={() => deleteItemFavourits(this.props.tasks.img_url)}
+                                onClick={() => deleteItemFavourits(this.props.tasks.lister_url)}
                             >Удалить</button>
                         </div>
                     </div >
@@ -53,7 +53,7 @@ class Item extends React.Component {
                             <div>{summary}</div>
                             <h5>{price_formatted}</h5>
                         </div>
-                        <button className="more-detaile__button">More information</button>
+                        <button className="more-detaile__button"><Link to='/ITEM'>ITEM</Link></button>
                     </div >}
             </div>
         );
