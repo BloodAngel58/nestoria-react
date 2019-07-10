@@ -5,7 +5,9 @@ import ItemsList from "../ItemsList/ItemsList";
 import ModalWindow from "../ModalWindow/ModalWindow"
 import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from "react-router-dom";
+
+
 import {
     getDownloadData,
     setFavourits,
@@ -60,20 +62,25 @@ class Form extends React.Component {
         this.props.setCyty(city);
         this.props.getDownloadData(updateUrl)
     };
-
+    // componentDidMount = () => {
+    //     window.location.push("/search")
+    // };
     render() {
 
         return (
 
             <div>
+
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
+
                 <Switch>
+
                     <Route exact path='/search' component={() =>
                         <ItemsList data={this.props.posts.catalogList}
                             openModalWindow={this.openModalWindow} />} />
 
-                    <Route exact path='/search/item' component={() =>
+                    <Route exact path='/search/item/:number' component={() =>
                         this.state.itemModal ? <ModalWindow
                             displaySelectionInt={0}
                             itemModal={this.state.itemModal}
@@ -87,7 +94,7 @@ class Form extends React.Component {
                             openModalWindow={this.openModalWindow}
                             data={this.props.posts.itemsFavourites} />} />
 
-                    <Route exact path='/favourites/item' component={() =>
+                    <Route exact path='/favourites/item/:number' component={() =>
                         this.state.itemModal ? <ModalWindow
                             displaySelectionInt={1}
                             itemModal={this.state.itemModal}
