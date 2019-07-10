@@ -33,8 +33,8 @@ class ModalWindow extends React.Component {
                         <h5>{price_formatted}</h5>
                     </div>
                     <div className="more-detaile__button">
-                        <button className="hide-modal__button"
-                        ><Link to='/search' onClick={closeModal}>ВЕРНУТЬСЯ</Link></button>
+                        {displaySelectionInt ? <Link to='/favourites' className="hide-modal__button-favourites" onClick={closeModal}>ВЕРНУТЬСЯ</Link> :
+                            <Link className="hide-modal__button-search" to='/search' onClick={closeModal}>ВЕРНУТЬСЯ</Link>}
                         {displaySelectionInt ? null
                             : <button className="add-favorit__button"
                                 onClick={() => addFavourits(this.props.img_url)}>Добавить в избранное</button>}

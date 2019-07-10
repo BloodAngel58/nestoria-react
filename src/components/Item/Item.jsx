@@ -34,7 +34,7 @@ class Item extends React.Component {
                             <h5>{price_formatted}</h5>
                         </div>
                         <div className="more-detaile__button">
-                            <button ><Link to='/favourites/item'>favourites ITEM</Link></button>
+                            <Link className="button_favourites__item" to='/favourites/item'>Подробнее</Link>
                             <button
                                 className="single-todo__destroy-button"
                                 onClick={() => deleteItemFavourits(this.props.tasks.lister_url)}
@@ -54,7 +54,7 @@ class Item extends React.Component {
                             <div>{summary}</div>
                             <h5>{price_formatted}</h5>
                         </div>
-                        <button className="more-detaile__button"><Link to='/search/item'>ITEM</Link></button>
+                        <Link className="button_search__item" to='/search/item'>Подробнее</Link>
                     </div >}
             </div>
         );
