@@ -20,20 +20,29 @@ class Form extends React.Component {
         page: 1,
         isModalOpen: false,
         itemModal: null,
-        displaySelectionInt: 0,
         displayFavourits: true
     }
 
-    openModalWindow = (key) => {
-        this.setState({
-            isModalOpen: true,
-            itemModal: this.props.posts.catalogList.find(item => item.img_url === key)
-        });
+    openModalWindow = (key, displaySelectionInt) => {
+        switch (displaySelectionInt) {
+            case 0: {
+                this.setState({
+                    isModalOpen: true,
+                    itemModal: this.props.posts.catalogList.find(item => item.img_url === key)
+                });
+                break;
+            }
+            case 1: {
+                this.setState({
+                    isModalOpen: true,
+                    itemModal: this.props.posts.itemsFavourites.find(item => item.img_url === key)
+                });
+                break;
+            }
+            default:
+                break;
+        }
     }
-    displaySelection = (number) => {
-        this.setState({ displaySelectionInt: number })
-    }
-
     deleteItemFavourits = id => {
         this.props.deleteFavourits(id);
     };
@@ -60,13 +69,24 @@ class Form extends React.Component {
                 <Input searchText={this.searchText} />
                 <DisplaySelection displaySelection={this.displaySelection} />
                 <Switch>
-                    <Route exact path='/HOME' component={() => <ItemsList data={this.props.posts.catalogList}
+                    <Route exact path='/search' component={() => <ItemsList data={this.props.posts.catalogList}
                         openModalWindow={this.openModalWindow} />} />
-                    <Route exact path='/ITEM' component={() => <ModalWindow
-                        displaySelectionInt={this.state.displaySelectionInt}
+                    <Route exact path='/search/item' component={() => this.state.itemModal ? <ModalWindow
+                        displaySelectionInt={0}
                         itemModal={this.state.itemModal}
                         closeModal={this.closeModal}
-                        addFavourits={this.addFavourits} />} />
+                        addFavourits={this.addFavourits} /> : <Redirect to='/search' />} />
+
+                    <Route path='/favourites' component={() => <ItemsList
+                        displayFavourits={1}
+                        deleteItemFavourits={this.deleteItemFavourits}
+                        openModalWindow={this.openModalWindow}
+                        data={this.props.posts.itemsFavourites} />} />
+                    <Route exact path='/favourites/item' component={() => this.state.itemModal ? <ModalWindow
+                        displaySelectionInt={1}
+                        itemModal={this.state.itemModal}
+                        closeModal={this.closeModal}
+                        addFavourits={this.addFavourits} /> : <Redirect to='/favourites' />} />
                 </Switch>
             </div>
         );
