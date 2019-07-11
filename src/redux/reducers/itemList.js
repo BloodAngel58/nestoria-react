@@ -22,7 +22,7 @@ export const formReducer = (state = initialState, action) => {
                     ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
                 };
             }
-            return { ...state }
+            return state
         }
 
         case 'SET_MODAL_OPENED': {
