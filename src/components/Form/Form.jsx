@@ -75,7 +75,6 @@ class Form extends React.Component {
                         <DisplaySelection displaySelection={this.displaySelection} />
                     </React.Fragment>
                 }
-
                 <Switch>
                     <Route exact path='/search' component={() =>
                         <ItemsList data={this.props.posts.catalogList}
