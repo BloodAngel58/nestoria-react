@@ -27,12 +27,16 @@ export const setNumberPages = number => {
     };
 };
 
-export const setFavourits = data => {
-    return {
-        type: _str.SET_CATALOG_FAVOURITES,
-        payload: data
+export const setFavourits = data => (dispatch, getState) => {
+    const state = getState()
+    if (!state.data.itemsFavourites.includes(data)) {
+        return dispatch({
+            type: _str.SET_CATALOG_FAVOURITES,
+            payload: data
+        })
+
     };
-};
+}
 export const setCyty = text => {
     return {
         type: _str.SET_CITY,

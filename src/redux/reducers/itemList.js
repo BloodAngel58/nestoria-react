@@ -17,12 +17,10 @@ export const formReducer = (state = initialState, action) => {
         }
 
         case 'SET_CATALOG_FAVOURITES': {
-            if (!state.itemsFavourites.includes(action.payload)) {
-                return {
-                    ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
-                };
-            }
-            return state
+            return {
+                ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
+            };
+
         }
 
         case 'SET_MODAL_OPENED': {
