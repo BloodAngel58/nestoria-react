@@ -21,8 +21,9 @@ export const formReducer = (state = initialState, action) => {
                 return {
                     ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
                 };
-            } else return { ...state }
+            } else return { state }
         }
+
         case 'SET_MODAL_OPENED': {
             return {
                 ...state, isModalOpen: action.payload
