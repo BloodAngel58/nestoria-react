@@ -47,7 +47,7 @@ export const formReducer = (state = initialState, action) => {
 
         case 'DELL_FAVOURITES': {
             return {
-                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.lister_url !== action.payload)
+                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.id !== action.payload)
             };
         }
         default:

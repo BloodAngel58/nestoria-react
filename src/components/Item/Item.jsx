@@ -1,6 +1,7 @@
 import React from "react";
 import "../Item/Item.css";
 import { Link } from 'react-router-dom'
+
 class Item extends React.Component {
     render() {
         const {
@@ -18,12 +19,12 @@ class Item extends React.Component {
             deleteItemFavourits,
             displayFavourits
         } = this.props;
-
+        this.props.tasks.id = id;
         return (
             <React.Fragment>
                 {displayFavourits ?
                     <div className="loaded-itemList__search"
-                        onClick={() => openModalWindow(this.props.tasks.img_url, 1)}>
+                        onClick={() => openModalWindow(this.props.tasks.id, 1)}>
                         <div className="loaded-img__item ">
                             <img src={img_url} alt="alt.png" />
                         </div>
@@ -37,13 +38,13 @@ class Item extends React.Component {
                             <Link className="button_favourites__item" to={`/favourites/item/${id}`}>Подробнее</Link>
                             <button
                                 className="single-todo__destroy-button"
-                                onClick={() => deleteItemFavourits(this.props.tasks.lister_url)}
+                                onClick={() => deleteItemFavourits(this.props.tasks.id)}
                             >Удалить</button>
                         </div>
                     </div >
                     :
                     <div className="loaded-itemList__search"
-                        onClick={() => openModalWindow(this.props.tasks.img_url, 0)}>
+                        onClick={() => openModalWindow(this.props.tasks.id, 0)}>
                         <div className="loaded-img__item ">
                             <img src={img_url} alt="alt.png" />
                         </div>
