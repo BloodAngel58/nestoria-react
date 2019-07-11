@@ -1,5 +1,18 @@
 import * as _str from "../constants/ActionsType";
 
+export const setModalOpened = flag => {
+    return {
+        type: _str.SET_MODAL_OPENED,
+        payload: flag
+    };
+};
+export const setModalItem = item => {
+    return {
+        type: _str.SET_ITEM_MODAL,
+        payload: item
+    };
+};
+
 export const getCatalog = data => {
     return {
         type: _str.GET_CATALOG,
@@ -26,6 +39,7 @@ export const setCyty = text => {
         payload: text
     };
 };
+
 export const deleteFavourits = id => {
     return {
         type: _str.DELL_FAVOURITES,

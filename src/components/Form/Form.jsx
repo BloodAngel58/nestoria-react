@@ -12,49 +12,50 @@ import {
     getDownloadData,
     setFavourits,
     setCyty,
-    deleteFavourits
+    deleteFavourits,
+    setModalOpened,
+    setModalItem
 } from "../../redux/actions/catalogActions";
 const url =
     "https://cors-anywhere.herokuapp.com/https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&country=uk&listing_type=buy&place_name=";
 
 class Form extends React.Component {
-    state = {
-        page: 1,
-        isModalOpen: false,
-        itemModal: null,
-        displayFavourits: true
-    }
+    // state = {
+    //     page: 1,
+    //     isModalOpen: false,
+    //     itemModal: null,
+    //     displayFavourits: true
+    // }
 
     openModalWindow = (key, displaySelectionInt) => {
+
+        this.props.setModalOpened(true);
         switch (displaySelectionInt) {
+
             case 0: {
-                this.setState({
-                    isModalOpen: true,
-                    itemModal: this.props.posts.catalogList.find(item => item.img_url === key)
-                });
+                this.props.setModalItem(this.props.posts.catalogList.find(item => item.img_url === key))
                 break;
             }
             case 1: {
-                this.setState({
-                    isModalOpen: true,
-                    itemModal: this.props.posts.itemsFavourites.find(item => item.img_url === key)
-                });
+                this.props.setModalItem(this.props.posts.itemsFavourites.find(item => item.img_url === key))
                 break;
             }
             default:
                 break;
         }
     }
+
     deleteItemFavourits = id => {
         this.props.deleteFavourits(id);
     };
 
     closeModal = () => {
-        this.setState({ isModalOpen: false, itemModal: null });
+        this.props.setModalOpened(false);
+        this.props.setModalItem(null)
     }
 
     addFavourits = () => {
-        this.props.setFavourits(this.state.itemModal)
+        this.props.setFavourits(this.props.posts.itemModal)
     }
 
     searchText = city => {
@@ -62,17 +63,18 @@ class Form extends React.Component {
         this.props.setCyty(city);
         this.props.getDownloadData(updateUrl)
     };
-    // componentDidMount = () => {
-    //     window.location.push("/search")
-    // };
+
     render() {
 
         return (
 
-            <div>
-
-                <Input searchText={this.searchText} />
-                <DisplaySelection displaySelection={this.displaySelection} />
+            <React.Fragment>
+                {this.props.posts.itemModal ? null
+                    : <React.Fragment>
+                        <Input searchText={this.searchText} />
+                        <DisplaySelection displaySelection={this.displaySelection} />
+                    </React.Fragment>
+                }
 
                 <Switch>
 
@@ -81,9 +83,9 @@ class Form extends React.Component {
                             openModalWindow={this.openModalWindow} />} />
 
                     <Route exact path='/search/item/:number' component={() =>
-                        this.state.itemModal ? <ModalWindow
+                        this.props.posts.itemModal ? <ModalWindow
                             displaySelectionInt={0}
-                            itemModal={this.state.itemModal}
+                            itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
                             addFavourits={this.addFavourits} /> : <Redirect to='/search' />} />
 
@@ -95,13 +97,13 @@ class Form extends React.Component {
                             data={this.props.posts.itemsFavourites} />} />
 
                     <Route exact path='/favourites/item/:number' component={() =>
-                        this.state.itemModal ? <ModalWindow
+                        this.props.posts.itemModal ? <ModalWindow
                             displaySelectionInt={1}
-                            itemModal={this.state.itemModal}
+                            itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
                         /> : <Redirect to='/favourites' />} />
                 </Switch>
-            </div>
+            </React.Fragment>
         );
 
 
@@ -143,7 +145,9 @@ const mapDispatchToProps = dispatch => {
         setCyty: text => dispatch(setCyty(text)),
         getDownloadData: url => dispatch(getDownloadData(url)),
         setFavourits: data => dispatch(setFavourits(data)),
-        deleteFavourits: id => dispatch(deleteFavourits(id))
+        deleteFavourits: id => dispatch(deleteFavourits(id)),
+        setModalOpened: flag => dispatch(setModalOpened(flag)),
+        setModalItem: item => dispatch(setModalItem(item))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

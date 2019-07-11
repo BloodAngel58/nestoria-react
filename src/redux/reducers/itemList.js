@@ -2,7 +2,9 @@ export const initialState = {
     catalogList: [],
     itemsFavourites: [],
     city: null,
-    NumberPages: null
+    NumberPages: null,
+    isModalOpen: false,
+    itemModal: null
 }
 
 export const formReducer = (state = initialState, action) => {
@@ -21,7 +23,16 @@ export const formReducer = (state = initialState, action) => {
                 };
             } else return { ...state }
         }
-
+        case 'SET_MODAL_OPENED': {
+            return {
+                ...state, isModalOpen: action.payload
+            };
+        }
+        case 'SET_ITEM_MODAL': {
+            return {
+                ...state, itemModal: action.payload
+            };
+        }
         case 'SET_NUMBER__PAGES': {
             return {
                 ...state, NumberPages: action.payload
