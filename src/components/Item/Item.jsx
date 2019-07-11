@@ -1,7 +1,6 @@
 import React from "react";
 import "../Item/Item.css";
 import { Link } from 'react-router-dom'
-
 class Item extends React.Component {
     render() {
         const {
@@ -23,8 +22,7 @@ class Item extends React.Component {
         return (
             <React.Fragment>
                 {displayFavourits ?
-                    <div className="loaded-itemList__search"
-                        onClick={() => openModalWindow(this.props.tasks.id, 1)}>
+                    <div className="loaded-itemList__search">
                         <div className="loaded-img__item ">
                             <img src={img_url} alt="alt.png" />
                         </div>
@@ -35,7 +33,7 @@ class Item extends React.Component {
                             <h5>{price_formatted}</h5>
                         </div>
                         <div className="more-detaile__button">
-                            <Link className="button_favourites__item" to={`/favourites/item/${id}`}>Подробнее</Link>
+                            <Link className="button_favourites__item" onClick={() => openModalWindow(this.props.tasks.id, 1)} to={`/favourites/item/${id}`}>Подробнее</Link>
                             <button
                                 className="single-todo__destroy-button"
                                 onClick={() => deleteItemFavourits(this.props.tasks.id)}
@@ -43,8 +41,7 @@ class Item extends React.Component {
                         </div>
                     </div >
                     :
-                    <div className="loaded-itemList__search"
-                        onClick={() => openModalWindow(this.props.tasks.id, 0)}>
+                    <div className="loaded-itemList__search">
                         <div className="loaded-img__item ">
                             <img src={img_url} alt="alt.png" />
                         </div>
@@ -54,7 +51,7 @@ class Item extends React.Component {
                             <div>{summary}</div>
                             <h5>{price_formatted}</h5>
                         </div>
-                        <Link className="button_search__item" to={`/search/item/${id}`}>Подробнее</Link>
+                        <Link className="button_search__item" onClick={() => openModalWindow(this.props.tasks.id, 0)} to={`/search/item/${id}`}>Подробнее</Link>
                     </div >
                 }
             </React.Fragment>

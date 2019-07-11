@@ -64,7 +64,6 @@ class Form extends React.Component {
     render() {
 
         return (
-
             <React.Fragment>
                 {this.props.posts.itemModal ? null
                     : <React.Fragment>
