@@ -77,7 +77,6 @@ class Form extends React.Component {
                 }
 
                 <Switch>
-
                     <Route exact path='/search' component={() =>
                         <ItemsList data={this.props.posts.catalogList}
                             openModalWindow={this.openModalWindow} />} />
@@ -105,32 +104,6 @@ class Form extends React.Component {
                 </Switch>
             </React.Fragment>
         );
-
-
-        // return (
-        //     <React.Fragment>
-        //         {this.state.isModalOpen ?
-        //             <ModalWindow
-        //                 displaySelectionInt={this.state.displaySelectionInt}
-        //                 itemModal={this.state.itemModal}
-        //                 closeModal={this.closeModal}
-        //                 addFavourits={this.addFavourits} />
-        //             : null
-        //         }
-        //         <Input searchText={this.searchText} />
-        //         <DisplaySelection displaySelection={this.displaySelection} />
-        //         {this.state.displaySelectionInt ?
-        //             <ItemsList
-        //                 displayFavourits={this.state.displayFavourits}
-        //                 deleteItemFavourits={this.deleteItemFavourits}
-        //                 openModalWindow={this.openModalWindow}
-        //                 data={this.props.posts.itemsFavourites} />
-        //             : <ItemsList
-        //                 data={this.props.posts.catalogList}
-        //                 openModalWindow={this.openModalWindow} />
-        //         }
-        //     </React.Fragment>
-        // );
     }
 }
 

@@ -42,23 +42,23 @@ class Item extends React.Component {
                         </div>
                     </div >
                     :
-                    <div className="loaded-itemList__search" 
-                onClick={() => openModalWindow(this.props.tasks.img_url, 0)}>
+                    <div className="loaded-itemList__search"
+                        onClick={() => openModalWindow(this.props.tasks.img_url, 0)}>
                         <div className="loaded-img__item ">
-                    <img src={img_url} alt="alt.png" />
-                </div>
-                <div className="loaded-text__content">
-                    <h2>{title}</h2>
-                    <h3>{keywords}</h3>
-                    <div>{summary}</div>
-                    <h5>{price_formatted}</h5>
-                </div>
-                <Link className="button_search__item" to={`/search/item/${id}`}>Подробнее</Link>
+                            <img src={img_url} alt="alt.png" />
+                        </div>
+                        <div className="loaded-text__content">
+                            <h2>{title}</h2>
+                            <h3>{keywords}</h3>
+                            <div>{summary}</div>
+                            <h5>{price_formatted}</h5>
+                        </div>
+                        <Link className="button_search__item" to={`/search/item/${id}`}>Подробнее</Link>
                     </div >
                 }
             </React.Fragment>
         )
-        ;
+            ;
     }
 }
 export { Item };
