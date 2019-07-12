@@ -16,9 +16,9 @@ import {
     setModalOpened,
     setModalItem
 } from "../../redux/actions/catalogActions";
+import { getIdItem } from "../../OtherFunctions/OtherFunctions"
 const url =
     "https://cors-anywhere.herokuapp.com/https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&country=uk&listing_type=buy&place_name=";
-
 class Form extends React.Component {
 
     openModalWindow = (key, displaySelectionInt) => {
@@ -27,12 +27,12 @@ class Form extends React.Component {
         switch (displaySelectionInt) {
 
             case 0: {
-                this.props.setModalItem(this.props.posts.catalogList.find(item => item.id === key))
+                this.props.setModalItem(this.props.posts.catalogList.find(item => getIdItem(item) === key))
                 break;
             }
 
             case 1: {
-                this.props.setModalItem(this.props.posts.itemsFavourites.find(item => item.id === key))
+                this.props.setModalItem(this.props.posts.itemsFavourites.find(item => getIdItem(item) === key))
                 break;
             }
 

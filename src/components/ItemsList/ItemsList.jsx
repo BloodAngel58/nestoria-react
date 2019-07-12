@@ -14,8 +14,8 @@ class ItemList extends Component {
         if (tasks.length !== 0) {
             return tasks.map(function (item) {
                 return <Item
-                    id={getIdItem()}
-                    key={getIdItem()}
+                    id={getIdItem(item)}
+                    key={getIdItem(item)}
                     deleteItemFavourits={deleteItemFavourits}
                     displayFavourits={displayFavourits}
                     tasks={item}

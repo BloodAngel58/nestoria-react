@@ -18,7 +18,7 @@ class Item extends React.Component {
             deleteItemFavourits,
             displayFavourits
         } = this.props;
-        this.props.tasks.id = id;
+
         return (
             <React.Fragment>
                 {displayFavourits ?
@@ -33,10 +33,12 @@ class Item extends React.Component {
                             <h5>{price_formatted}</h5>
                         </div>
                         <div className="more-detaile__button">
-                            <Link className="button_favourites__item" onClick={() => openModalWindow(this.props.tasks.id, 1)} to={`/favourites/item/${id}`}>Подробнее</Link>
+                            <Link className="button_favourites__item"
+                                onClick={() => openModalWindow(id, 1)}
+                                to={`/favourites/item/${id}`}>Подробнее</Link>
                             <button
                                 className="single-todo__destroy-button"
-                                onClick={() => deleteItemFavourits(this.props.tasks.id)}
+                                onClick={() => deleteItemFavourits(id)}
                             >Удалить</button>
                         </div>
                     </div >
@@ -51,7 +53,9 @@ class Item extends React.Component {
                             <div>{summary}</div>
                             <h5>{price_formatted}</h5>
                         </div>
-                        <Link className="button_search__item" onClick={() => openModalWindow(this.props.tasks.id, 0)} to={`/search/item/${id}`}>Подробнее</Link>
+                        <Link className="button_search__item"
+                            onClick={() => openModalWindow(id, 0)}
+                            to={`/search/item/${id}`}>Подробнее</Link>
                     </div >
                 }
             </React.Fragment>

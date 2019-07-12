@@ -3,7 +3,7 @@
     flex-direction: row;
 }
 .button_home {
-    width: 150px;
+  width: 150px;
   height: 30px;
   text-decoration: none;
   padding-top: 9px;
@@ -21,10 +21,10 @@
 }
 
 .button_favourites{
-    width: 150px;
+  width: 150px;
   height: 30px;
   text-decoration: none;
-    padding-top: 9px;
+  padding-top: 9px;
   color: #a79258;
   text-align: center;
   line-height: 20px;
@@ -37,6 +37,5 @@
 }
 
 .activeSelector{
-  
   background-color: #4a108b5b
 }

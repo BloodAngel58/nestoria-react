@@ -1,3 +1,4 @@
+import { getIdItem } from "../../OtherFunctions/OtherFunctions"
 export const initialState = {
     catalogList: [],
     itemsFavourites: [],
@@ -47,7 +48,8 @@ export const formReducer = (state = initialState, action) => {
 
         case 'DELL_FAVOURITES': {
             return {
-                ...state, itemsFavourites: state.itemsFavourites.filter(item => item.id !== action.payload)
+                ...state,
+                itemsFavourites: state.itemsFavourites.filter(item => getIdItem(item) !== action.payload)
             };
         }
         default:
