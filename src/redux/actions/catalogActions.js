@@ -1,27 +1,52 @@
-import * as _str from "../constants/ActionsType";
+import { ResuxActionsType } from "../constants/ActionsType";
+
+export const setModalOpened = flag => {
+    return {
+        type: ResuxActionsType.SET_MODAL_OPENED,
+        payload: flag
+    };
+};
+export const setModalItem = item => {
+    return {
+        type: ResuxActionsType.SET_ITEM_MODAL,
+        payload: item
+    };
+};
 
 export const getCatalog = data => {
     return {
-        type: _str.GET_CATALOG,
+        type: ResuxActionsType.GET_CATALOG,
         payload: data
     };
 };
 
-export const setFavourits = data => {
+export const setNumberPages = number => {
     return {
-        type: _str.SET_CATALOG_FAVOURITES,
-        payload: data
+        type: ResuxActionsType.SET_NUMBER__PAGES,
+        payload: number
     };
 };
+
+export const setFavourits = data => (dispatch, getState) => {
+    const state = getState()
+    if (!state.data.itemsFavourites.includes(data)) {
+        return dispatch({
+            type: ResuxActionsType.SET_CATALOG_FAVOURITES,
+            payload: data
+        })
+
+    };
+}
 export const setCyty = text => {
     return {
-        type: _str.SET_CITY,
+        type: ResuxActionsType.SET_CITY,
         payload: text
     };
 };
+
 export const deleteFavourits = id => {
     return {
-        type: _str.DELL_FAVOURITES,
+        type: ResuxActionsType.DELL_FAVOURITES,
         payload: id
     };
 }
@@ -37,8 +62,8 @@ export const getDownloadData = (url) => {
         })
             .then(res => res.json())
             .then(res => {
-                const arr = res.response.listings;
-                dispatch(getCatalog(arr))
+                dispatch(setNumberPages(res.response.total_pages > 100 ? 100 : res.response.total_pages))
+                dispatch(getCatalog(res.response.listings))
             }
             )
             .catch(error => console.log(error));

@@ -44,15 +44,67 @@ justify-content: space-around;
 }
 .more-detaile__button button{ 
   margin: 20px;
-padding:0  }
+  padding:0  
+}
+.more-detaile__button a{ 
+  margin: 20px;
 
-.hide-modal__button{
-  color: red;
+}
+
+.hide-modal__button-favourites{
+   width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 15px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.hide-modal__button-search{
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 10px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 15px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
   cursor: pointer;
 }
 .add-favorit__button{
-  color: blue;
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 10px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
   cursor: pointer;
 }
-.add-favorit__button:active { background: green; }
+.add-favorit__button:active { background: #a79258; }
 .hide-modal__button:active { background: red; }

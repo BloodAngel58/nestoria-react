@@ -1,21 +1,14 @@
 import React, { Component } from "react";
-//import "./DisplaySelection.css";
-
+import "./DisplaySelection.css";
+import { NavLink } from 'react-router-dom'
 class DisplaySelection extends Component {
-    receiveData = e => {
-        const selectInd = e.target.options.selectedIndex;
-        this.props.displaySelection(selectInd);
-
-    };
 
     render() {
         return (
             <div className="task-item__sort">
-                <select onChange={this.receiveData}>
-                    <option value="itemList">Результат запроса</option>
-                    <option value="itemsFavourites">Избранное</option>
-                </select>
-            </div>
+                <NavLink className="button_home" activeClassName='activeSelector' to='/search'>Поиск</NavLink>
+                <NavLink className="button_favourites" activeClassName="activeSelector" to='/favourites'>favourites</NavLink>
+            </div >
         );
     }
 }

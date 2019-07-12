@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../ItemsList/ItemsList.css";
 import { Item } from "../Item/Item.jsx";
-
+import { getIdItem } from "../../OtherFunctions/OtherFunctions"
 
 class ItemList extends Component {
     renderNews = tasks => {
@@ -13,7 +13,9 @@ class ItemList extends Component {
 
         if (tasks.length !== 0) {
             return tasks.map(function (item) {
-                return <Item key={item.lister_url}
+                return <Item
+                    id={getIdItem(item)}
+                    key={getIdItem(item)}
                     deleteItemFavourits={deleteItemFavourits}
                     displayFavourits={displayFavourits}
                     tasks={item}

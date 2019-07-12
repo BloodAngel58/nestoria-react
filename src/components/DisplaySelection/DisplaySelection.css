@@ -1,0 +1,41 @@
+.task-item__sort{
+    display: flex;
+    flex-direction: row;
+}
+.button_home {
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 17px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
+}
+
+.button_favourites{
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 17px arial;
+   background-color: #282c34;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+}
+
+.activeSelector{
+  background-color: #4a108b5b
+}
