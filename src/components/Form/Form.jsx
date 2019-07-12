@@ -7,7 +7,7 @@ import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
 import LoadingPagination from "../LoadingPagination/LoadingPagination"
-
+import PagePagination from "../PagePagination/PagePagination"
 import {
     getDownloadData,
     setFavourits,
@@ -63,13 +63,15 @@ class Form extends React.Component {
         this.props.getDownloadData(updateUrl, type)
     };
     uploadingData = () => {
-        if (this.props.posts.pages < this.props.posts.NumberPages) {
-            this.props.posts.pages++
+        let numberPage = this.props.posts.pages;
+        if (numberPage < this.props.posts.NumberPages) {
+            numberPage++;
+            this.props.setPages(numberPage);
+            const pageNumber = "&page=" + numberPage;
+            const type = 'LOADING_PAGINATION'
+            const updateUrl = url + this.props.posts.city + pageNumber;
+            this.props.getDownloadData(updateUrl, type)
         }
-        const pageNumber = "&page=" + this.props.posts.pages;
-        const type = 'LOADING_PAGINATION'
-        const updateUrl = url + this.props.posts.city + pageNumber;
-        this.props.getDownloadData(updateUrl, type)
     }
 
     render() {
@@ -80,6 +82,7 @@ class Form extends React.Component {
                     : <React.Fragment>
                         <Input searchText={this.searchText} />
                         <DisplaySelection displaySelection={this.displaySelection} />
+                        {this.props.posts.city ? <PagePagination /> : null}
                     </React.Fragment>
                 }
                 <Switch>
@@ -110,11 +113,11 @@ class Form extends React.Component {
                 </Switch>
                 {this.props.posts.itemModal ? null
                     : <React.Fragment>
-                        <LoadingPagination
+                        {this.props.posts.city ? <LoadingPagination
                             uploadingData={this.uploadingData}
                             page={this.props.posts.pages}
                             maxNumberPages={this.props.posts.NumberPages}
-                        />
+                        /> : null}
                     </React.Fragment>
                 }
             </React.Fragment>

@@ -76,13 +76,11 @@ export const getDownloadData = (url, type) => {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(type)
                 if (type === "start") {
                     dispatch(getCatalog(res.response.listings, type));
                     console.log(res.response.listings);
                 }
                 if (type === "LOADING_PAGINATION") {
-                    console.log(url)
                     dispatch(paginationType(res.response.listings, type));
                 }
                 dispatch(setNumberPages(res.response.total_pages > 100 ? 100 : res.response.total_pages))

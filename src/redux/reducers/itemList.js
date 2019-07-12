@@ -56,6 +56,11 @@ export const formReducer = (state = initialState, action) => {
                 ...state, city: action.payload
             };
         }
+        case 'SET_PAGES': {
+            return {
+                ...state, pages: action.payload
+            };
+        }
 
         case 'DELL_FAVOURITES': {
             return {
