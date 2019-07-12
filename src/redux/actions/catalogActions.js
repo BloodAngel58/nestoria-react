@@ -1,5 +1,11 @@
 import { ResuxActionsType } from "../constants/ActionsType";
 
+export const getPages = pages => {
+    return {
+        type: ResuxActionsType.GET_PAGES,
+        payload: pages
+    };
+};
 export const setModalOpened = flag => {
     return {
         type: ResuxActionsType.SET_MODAL_OPENED,

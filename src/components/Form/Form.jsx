@@ -6,7 +6,7 @@ import ModalWindow from "../ModalWindow/ModalWindow"
 import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
 import { Route, Redirect, Switch } from "react-router-dom";
-
+import LoadingPagination from "../LoadingPagination/LoadingPagination"
 
 import {
     getDownloadData,
@@ -55,7 +55,7 @@ class Form extends React.Component {
     }
 
     searchText = city => {
-        const pageNumber = "&page=" + 1;
+        const pageNumber = "&page=" + this.props.posts.pages;
         const updateUrl = url + city + pageNumber;
         this.props.setCyty(city);
         this.props.getDownloadData(updateUrl)
@@ -97,6 +97,7 @@ class Form extends React.Component {
                             closeModal={this.closeModal}
                         /> : <Redirect to='/favourites' />} />
                 </Switch>
+                <LoadingPagination page={this.props.posts.pages} maxNumberPages={this.props.posts.NumberPages} />
             </React.Fragment>
         );
     }

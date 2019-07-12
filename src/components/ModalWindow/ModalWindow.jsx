@@ -54,7 +54,7 @@ class ModalWindow extends React.Component {
                                 onClick={() => addFavourits(this.props.img_url)}
                             >
                                 Добавить в избранное
-                                    </button>
+                            </button>
                         }
                     </div>
                 </div>
