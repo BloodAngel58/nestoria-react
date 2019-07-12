@@ -12,6 +12,12 @@ export const initialState = {
 export const formReducer = (state = initialState, action) => {
     switch (action.type) {
 
+        case 'LOADING_PAGINATION': {
+            return {
+                ...state, catalogList: [...state.catalogList, ...action.payload]
+            };
+        }
+
         case 'GET_PAGES': {
             return {
                 ...state, pages: action.payload

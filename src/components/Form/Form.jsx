@@ -14,7 +14,8 @@ import {
     setCyty,
     deleteFavourits,
     setModalOpened,
-    setModalItem
+    setModalItem,
+    setPages
 } from "../../redux/actions/catalogActions";
 import { getIdItem } from "../../OtherFunctions/OtherFunctions"
 const url =
@@ -55,11 +56,21 @@ class Form extends React.Component {
     }
 
     searchText = city => {
+        const type = 'start';
         const pageNumber = "&page=" + this.props.posts.pages;
         const updateUrl = url + city + pageNumber;
         this.props.setCyty(city);
-        this.props.getDownloadData(updateUrl)
+        this.props.getDownloadData(updateUrl, type)
     };
+    uploadingData = () => {
+        if (this.props.posts.pages < this.props.posts.NumberPages) {
+            this.props.posts.pages++
+        }
+        const pageNumber = "&page=" + this.props.posts.pages;
+        const type = 'LOADING_PAGINATION'
+        const updateUrl = url + this.props.posts.city + pageNumber;
+        this.props.getDownloadData(updateUrl, type)
+    }
 
     render() {
 
@@ -77,7 +88,7 @@ class Form extends React.Component {
                             openModalWindow={this.openModalWindow} />} />
 
                     <Route exact path='/search/item/:number' component={() =>
-                        this.props.posts.itemModal ? <ModalWindow
+                        this.props.posts.isModalOpen ? <ModalWindow
                             displaySelectionInt={0}
                             itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
@@ -91,13 +102,21 @@ class Form extends React.Component {
                             data={this.props.posts.itemsFavourites} />} />
 
                     <Route exact path='/favourites/item/:number' component={() =>
-                        this.props.posts.itemModal ? <ModalWindow
+                        this.props.posts.isModalOpen ? <ModalWindow
                             displaySelectionInt={1}
                             itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
                         /> : <Redirect to='/favourites' />} />
                 </Switch>
-                <LoadingPagination page={this.props.posts.pages} maxNumberPages={this.props.posts.NumberPages} />
+                {this.props.posts.itemModal ? null
+                    : <React.Fragment>
+                        <LoadingPagination
+                            uploadingData={this.uploadingData}
+                            page={this.props.posts.pages}
+                            maxNumberPages={this.props.posts.NumberPages}
+                        />
+                    </React.Fragment>
+                }
             </React.Fragment>
         );
     }
@@ -112,11 +131,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setCyty: text => dispatch(setCyty(text)),
-        getDownloadData: url => dispatch(getDownloadData(url)),
+        getDownloadData: (url, type) => dispatch(getDownloadData(url, type)),
         setFavourits: data => dispatch(setFavourits(data)),
         deleteFavourits: id => dispatch(deleteFavourits(id)),
         setModalOpened: flag => dispatch(setModalOpened(flag)),
-        setModalItem: item => dispatch(setModalItem(item))
+        setModalItem: item => dispatch(setModalItem(item)),
+        setPages: page => dispatch(setPages(page))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

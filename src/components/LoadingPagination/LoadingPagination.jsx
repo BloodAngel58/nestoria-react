@@ -1,11 +1,12 @@
 import React from "react";
+import ".././LoadingPagination/LoadingPagination.css"
 class LoadingPagination extends React.Component {
 
     render() {
-        const str = "Тут могла быть ваша реклама"
+
         return (
-            <div >
-                <h1>{str}</h1>
+            <div className="container-more__data">
+                <button className="more-data__button" onClick={this.props.uploadingData}>Загрузить еще</button>
             </div >
         );
     }
