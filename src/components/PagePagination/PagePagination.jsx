@@ -27,7 +27,7 @@ class PagePagination extends React.Component {
                         arrNumberPage.push(i)
                     }
                 }
-                if (page === maxNumberPages || page === maxNumberPages - 1) {
+                if (page === maxNumberPages || page === (maxNumberPages - 1)) {
                     for (let i = maxNumberPages - 4; i <= maxNumberPages; i++) {
                         arrNumberPage.push(i)
                     }
@@ -50,19 +50,22 @@ class PagePagination extends React.Component {
     render() {
         return (
             <div className="container-pagination">
-                <button className="pagination-front-page__button"
+                <NavLink className="pagination-front-page__button"
                     onClick={() => this.props.uploadingPage(1)}
+                    to="/search/1"
+
                 >
                     Первая
-                </button>
+                </NavLink>
                 {
                     this.renderNumberPage()
                 }
-                <button className="pagination-last-page__button"
-                    onClick={() => this.props.uploadingPage(this.props.maxNumberPages - 1)}
+                <NavLink className="pagination-last-page__button"
+                    onClick={() => this.props.uploadingPage(this.props.maxNumberPages)}
+                    to={`/search/${this.props.maxNumberPages}`}
                 >
                     Последняя
-                 </button>
+                 </NavLink>
             </div >
         );
     }

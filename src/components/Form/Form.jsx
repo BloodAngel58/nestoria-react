@@ -76,7 +76,7 @@ class Form extends React.Component {
     }
 
     uploadingPage = (page) => {
-        if (page < this.props.posts.NumberPages) {
+        if (page <= this.props.posts.NumberPages) {
             this.props.setPages(page);
             const pageNumber = "&page=" + page;
             const type = 'PAGINAL_PAGINATION'
@@ -93,7 +93,7 @@ class Form extends React.Component {
                 {this.props.posts.itemModal ? null
                     : <React.Fragment>
                         <Input searchText={this.searchText} />
-                        <DisplaySelection displaySelection={this.displaySelection} />
+                        <DisplaySelection page={this.props.posts.pages} displaySelection={this.displaySelection} />
                         {this.props.posts.city ?
                             <PagePagination
                                 page={this.props.posts.pages}
@@ -113,6 +113,7 @@ class Form extends React.Component {
                             displaySelectionInt={0}
                             itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
+                            page={this.props.posts.pages}
                             addFavourits={this.addFavourits} /> : <Redirect to='/search' />} />
 
                     <Route exact path='/favourites' component={() =>
@@ -125,6 +126,7 @@ class Form extends React.Component {
                     <Route exact path='/favourites/item/:number' component={() =>
                         this.props.posts.isModalOpen ? <ModalWindow
                             displaySelectionInt={1}
+                            page={this.props.page}
                             itemModal={this.props.posts.itemModal}
                             closeModal={this.closeModal}
                         /> : <Redirect to='/favourites' />} />
