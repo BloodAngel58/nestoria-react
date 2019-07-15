@@ -62,6 +62,7 @@ class Form extends React.Component {
         this.props.setCyty(city);
         this.props.getDownloadData(updateUrl, type)
     };
+
     uploadingData = () => {
         let numberPage = this.props.posts.pages;
         if (numberPage < this.props.posts.NumberPages) {
@@ -82,7 +83,12 @@ class Form extends React.Component {
                     : <React.Fragment>
                         <Input searchText={this.searchText} />
                         <DisplaySelection displaySelection={this.displaySelection} />
-                        {this.props.posts.city ? <PagePagination /> : null}
+                        {this.props.posts.city ?
+                            <PagePagination
+                                page={this.props.posts.pages}
+                                maxNumberPages={this.props.posts.NumberPages}
+                            />
+                            : null}
                     </React.Fragment>
                 }
                 <Switch>
