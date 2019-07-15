@@ -10,13 +10,15 @@ class PagePagination extends React.Component {
 
         let arrNumberPage = []
 
-        for (let i = 1; i <= page + 2; i++) {
+        for (let i = 1; i <= 5; i++) {
             arrNumberPage.push(i)
         }
-        arrNumberPage.map(n => {
-            return <NavLink
+        console.log(arrNumberPage)
+        return arrNumberPage.map(n => {
+            return <NavLink key={n}
                 className="pagination-number-page"
                 activeClassName="pagination-number-page__active"
+                to={`/search/${n}`}
             >
                 {n}
             </NavLink>
