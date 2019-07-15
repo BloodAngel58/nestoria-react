@@ -5,19 +5,40 @@ class PagePagination extends React.Component {
     renderNumberPage = () => {
         const {
             page,
-            maxNumberPages
+            maxNumberPages,
+            uploadingPage
         } = this.props;
 
         let arrNumberPage = []
 
-        for (let i = 1; i <= 5; i++) {
-            arrNumberPage.push(i)
-        }
-        console.log(arrNumberPage)
+        if (maxNumberPages <= 5) {
+            for (let i = 1; i <= maxNumberPages; i++) {
+                arrNumberPage.push(i)
+            }
+        } else
+            if (maxNumberPages > 5) {
+                if (page === 1 || page < 3) {
+                    for (let i = 1; i <= 5; i++) {
+                        arrNumberPage.push(i)
+                    }
+                }
+                if (page >= 3 && page <= maxNumberPages - 2) {
+                    for (let i = page - 2; i <= page + 2; i++) {
+                        arrNumberPage.push(i)
+                    }
+                }
+                if (page === maxNumberPages || page === maxNumberPages - 1) {
+                    for (let i = maxNumberPages - 4; i <= maxNumberPages; i++) {
+                        arrNumberPage.push(i)
+                    }
+                }
+            }
+
         return arrNumberPage.map(n => {
             return <NavLink key={n}
                 className="pagination-number-page"
                 activeClassName="pagination-number-page__active"
+                onClick={() => uploadingPage(n)}
                 to={`/search/${n}`}
             >
                 {n}
@@ -27,12 +48,21 @@ class PagePagination extends React.Component {
     };
 
     render() {
-
         return (
             <div className="container-pagination">
-                <button className="pagination-front-page__button"> Первая</button>
-                {this.renderNumberPage()}
-                <button className="pagination-last-page__button" > Последняя </button>
+                <button className="pagination-front-page__button"
+                    onClick={() => this.props.uploadingPage(1)}
+                >
+                    Первая
+                </button>
+                {
+                    this.renderNumberPage()
+                }
+                <button className="pagination-last-page__button"
+                    onClick={() => this.props.uploadingPage(this.props.maxNumberPages - 1)}
+                >
+                    Последняя
+                 </button>
             </div >
         );
     }

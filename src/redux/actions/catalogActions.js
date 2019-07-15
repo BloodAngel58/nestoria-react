@@ -1,7 +1,6 @@
 import { ReduxActionsType } from "../constants/ActionsType";
 
 export const paginationType = (page, type) => {
-    console.log(page)
     return {
         type: ReduxActionsType[type],
         payload: page
@@ -79,7 +78,7 @@ export const getDownloadData = (url, type) => {
                 if (type === "start") {
                     dispatch(getCatalog(res.response.listings, type));
                 }
-                if (type === "LOADING_PAGINATION") {
+                if (type === "LOADING_PAGINATION" || type === "PAGINAL_PAGINATION") {
                     dispatch(paginationType(res.response.listings, type));
                 }
                 dispatch(setNumberPages(res.response.total_pages > 100 ? 100 : res.response.total_pages))

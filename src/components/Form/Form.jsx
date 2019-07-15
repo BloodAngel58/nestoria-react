@@ -75,6 +75,17 @@ class Form extends React.Component {
         }
     }
 
+    uploadingPage = (page) => {
+        if (page < this.props.posts.NumberPages) {
+            this.props.setPages(page);
+            const pageNumber = "&page=" + page;
+            const type = 'PAGINAL_PAGINATION'
+            const updateUrl = url + this.props.posts.city + pageNumber;
+            this.props.getDownloadData(updateUrl, type)
+        }
+    }
+
+
     render() {
 
         return (
@@ -87,12 +98,13 @@ class Form extends React.Component {
                             <PagePagination
                                 page={this.props.posts.pages}
                                 maxNumberPages={this.props.posts.NumberPages}
+                                uploadingPage={this.uploadingPage}
                             />
                             : null}
                     </React.Fragment>
                 }
                 <Switch>
-                    <Route exact path='/search' component={() =>
+                    <Route exact path='/search/:number' component={() =>
                         <ItemsList data={this.props.posts.catalogList}
                             openModalWindow={this.openModalWindow} />} />
 

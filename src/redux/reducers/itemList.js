@@ -17,10 +17,14 @@ export const formReducer = (state = initialState, action) => {
                 ...state, catalogList: [...state.catalogList, ...action.payload]
             };
         }
-
         case 'GET_PAGES': {
             return {
                 ...state, pages: action.payload
+            };
+        }
+        case 'PAGINAL_PAGINATION': {
+            return {
+                ...state, catalogList: action.payload
             };
         }
         case 'GET_CATALOG': {
