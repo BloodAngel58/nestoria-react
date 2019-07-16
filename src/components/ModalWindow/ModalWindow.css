@@ -1,0 +1,110 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.856);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-todo__item {
+ background-color: #282c34;
+  flex-direction: row;
+  display: flex;
+  border: 5px solid #808080;
+  padding: 10px;
+  margin: 20px;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+.loaded-img__item img{
+  margin: 10px;
+  padding: 0;
+  width: 200px;
+  height: 200px;
+  background: #c2c2c2;
+  border: 1px solid #808080;
+  border-radius: 3px;
+   flex: 1 1 30%;
+}
+.loaded-text__content {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 0;
+  flex: 2 1 60%;
+}
+.more-detaile__button {
+flex: 1 1 15%;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+}
+.more-detaile__button button{ 
+  margin: 20px;
+  padding:0  
+}
+.more-detaile__button a{ 
+  margin: 20px;
+
+}
+
+.hide-modal__button-favourites{
+   width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 15px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.hide-modal__button-search{
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 10px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 15px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.add-favorit__button{
+  width: 150px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 9px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 10px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.add-favorit__button:active { background: #a79258; }
+.hide-modal__button:active { background: red; }

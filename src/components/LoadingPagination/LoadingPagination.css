@@ -1,0 +1,29 @@
+.more-data__button{
+  width: 250px;
+  height: 30px;
+  text-decoration: none;
+  padding-top: 4px;
+  color: #a79258;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 20px auto;
+  font: normal 20px arial;
+  background-color: #282c34;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid #a79258;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.more-data__button:active{
+  background-color:   #a79258
+}
+.more-data__button button{ 
+  margin: 20px;
+}
+.container-more__data{
+    background-color: #282c346c;
+    border: 1px solid #a79258;
+    border-radius: 40px 40px;
+}
