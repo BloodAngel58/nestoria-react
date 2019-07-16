@@ -5,7 +5,7 @@ import ItemsList from "../ItemsList/ItemsList";
 import ModalWindow from "../ModalWindow/ModalWindow"
 import DisplaySelection from "../DisplaySelection/DisplaySelection"
 import { connect } from "react-redux";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 import LoadingPagination from "../LoadingPagination/LoadingPagination"
 import PagePagination from "../PagePagination/PagePagination"
 import {
@@ -21,6 +21,10 @@ import { getIdItem } from "../../OtherFunctions/OtherFunctions"
 const url =
     "https://cors-anywhere.herokuapp.com/https://api.nestoria.co.uk/api?encoding=json&pretty=1&action=search_listings&country=uk&listing_type=buy&place_name=";
 class Form extends React.Component {
+
+    componentDidMount = () => {
+        this.props.history.push("/search/1")
+    }
 
     openModalWindow = (key, displaySelectionInt) => {
 
@@ -162,4 +166,4 @@ const mapDispatchToProps = dispatch => {
         setPages: page => dispatch(setPages(page))
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form));
