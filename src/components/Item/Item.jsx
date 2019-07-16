@@ -21,6 +21,7 @@ class Item extends React.Component {
 
         return (
             <React.Fragment>
+
                 {displayFavourits ?
                     <div className="loaded-itemList__search">
                         <div className="loaded-img__item ">

@@ -1,28 +1,41 @@
-import { ResuxActionsType } from "../constants/ActionsType";
+import { ReduxActionsType } from "../constants/ActionsType";
 
+export const paginationType = (page, type) => {
+    return {
+        type: ReduxActionsType[type],
+        payload: page
+    };
+};
+
+export const setPages = pages => {
+    return {
+        type: ReduxActionsType.SET_PAGES,
+        payload: pages
+    };
+};
 export const setModalOpened = flag => {
     return {
-        type: ResuxActionsType.SET_MODAL_OPENED,
+        type: ReduxActionsType.SET_MODAL_OPENED,
         payload: flag
     };
 };
 export const setModalItem = item => {
     return {
-        type: ResuxActionsType.SET_ITEM_MODAL,
+        type: ReduxActionsType.SET_ITEM_MODAL,
         payload: item
     };
 };
 
 export const getCatalog = data => {
     return {
-        type: ResuxActionsType.GET_CATALOG,
+        type: ReduxActionsType.GET_CATALOG,
         payload: data
     };
 };
 
 export const setNumberPages = number => {
     return {
-        type: ResuxActionsType.SET_NUMBER__PAGES,
+        type: ReduxActionsType.SET_NUMBER__PAGES,
         payload: number
     };
 };
@@ -31,7 +44,7 @@ export const setFavourits = data => (dispatch, getState) => {
     const state = getState()
     if (!state.data.itemsFavourites.includes(data)) {
         return dispatch({
-            type: ResuxActionsType.SET_CATALOG_FAVOURITES,
+            type: ReduxActionsType.SET_CATALOG_FAVOURITES,
             payload: data
         })
 
@@ -39,18 +52,18 @@ export const setFavourits = data => (dispatch, getState) => {
 }
 export const setCyty = text => {
     return {
-        type: ResuxActionsType.SET_CITY,
+        type: ReduxActionsType.SET_CITY,
         payload: text
     };
 };
 
 export const deleteFavourits = id => {
     return {
-        type: ResuxActionsType.DELL_FAVOURITES,
+        type: ReduxActionsType.DELL_FAVOURITES,
         payload: id
     };
 }
-export const getDownloadData = (url) => {
+export const getDownloadData = (url, type) => {
     return (dispatch) => {
         return fetch(url, {
             method: "GET",
@@ -62,8 +75,14 @@ export const getDownloadData = (url) => {
         })
             .then(res => res.json())
             .then(res => {
+                if (type === "start") {
+                    dispatch(getCatalog(res.response.listings, type));
+                }
+                if (type === "LOADING_PAGINATION" || type === "PAGINAL_PAGINATION") {
+                    dispatch(paginationType(res.response.listings, type));
+                }
                 dispatch(setNumberPages(res.response.total_pages > 100 ? 100 : res.response.total_pages))
-                dispatch(getCatalog(res.response.listings))
+
             }
             )
             .catch(error => console.log(error));

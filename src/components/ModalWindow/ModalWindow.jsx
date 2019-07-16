@@ -17,7 +17,8 @@ class ModalWindow extends React.Component {
         const {
             closeModal,
             addFavourits,
-            displaySelectionInt
+            displaySelectionInt,
+            page
         } = this.props
 
         return (
@@ -42,7 +43,7 @@ class ModalWindow extends React.Component {
                             </Link>
                             : <Link
                                 className="hide-modal__button-search"
-                                to='/search' onClick={closeModal}
+                                to={`/search/${page}`} onClick={closeModal}
                             >
                                 ВЕРНУТЬСЯ
                                     </Link>
@@ -54,7 +55,7 @@ class ModalWindow extends React.Component {
                                 onClick={() => addFavourits(this.props.img_url)}
                             >
                                 Добавить в избранное
-                                    </button>
+                            </button>
                         }
                     </div>
                 </div>

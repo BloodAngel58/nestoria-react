@@ -4,6 +4,7 @@ export const initialState = {
     itemsFavourites: [],
     city: null,
     NumberPages: null,
+    pages: 1,
     isModalOpen: false,
     itemModal: null
 }
@@ -11,6 +12,21 @@ export const initialState = {
 export const formReducer = (state = initialState, action) => {
     switch (action.type) {
 
+        case 'LOADING_PAGINATION': {
+            return {
+                ...state, catalogList: [...state.catalogList, ...action.payload]
+            };
+        }
+        case 'GET_PAGES': {
+            return {
+                ...state, pages: action.payload
+            };
+        }
+        case 'PAGINAL_PAGINATION': {
+            return {
+                ...state, catalogList: action.payload
+            };
+        }
         case 'GET_CATALOG': {
             return {
                 ...state, catalogList: action.payload
@@ -21,7 +37,6 @@ export const formReducer = (state = initialState, action) => {
             return {
                 ...state, itemsFavourites: [...state.itemsFavourites, action.payload]
             };
-
         }
 
         case 'SET_MODAL_OPENED': {
@@ -43,6 +58,11 @@ export const formReducer = (state = initialState, action) => {
         case 'SET_CITY': {
             return {
                 ...state, city: action.payload
+            };
+        }
+        case 'SET_PAGES': {
+            return {
+                ...state, pages: action.payload
             };
         }
 
